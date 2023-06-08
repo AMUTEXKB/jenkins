@@ -270,7 +270,8 @@ pipeline {
             ]  
                     def batchSize = 5
 
-                    def accountBatches = accountList.collate(batchSize)
+                    def accountIds = accountList.collect { it.account_id }
+                    def accountBatches = accountIds.collate(batchSize)
 
                     accountBatches.eachWithIndex { accountBatch, index ->
                         def batchNumber = index + 1
