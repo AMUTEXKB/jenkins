@@ -47,6 +47,7 @@ pipeline {
                                 // Perform the necessary actions for each account
                                 // Replace this with your actual processing logic or API calls
                             }
+                        parallel accountBatch
                         }
                     }
                 }
