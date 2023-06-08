@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    stages {
     stage('Get Org Members') {
         try {
             Map args = [
@@ -93,4 +94,4 @@ pipeline {
             throw e
         }
     }
-}
+}}
