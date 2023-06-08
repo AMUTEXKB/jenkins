@@ -40,16 +40,12 @@ pipeline {
                         def batchNumber = index + 1
 
                         stage("Batch ${batchNumber}") {
-                            steps {
-                                script {
-                                    echo "Processing batch ${batchNumber}"
-                                    accountBatch.each { account ->
-                                        echo "Processing account: ${account}"
-                                        sleep time: 60, unit: 'SECONDS'
-                                        // Perform the necessary actions for each account
-                                        // Replace this with your actual processing logic or API calls
-                                    }
-                                }
+                            echo "Processing batch ${batchNumber}"
+                            accountBatch.each { account ->
+                                echo "Processing account: ${account}"
+                                sleep time: 60, unit: 'SECONDS'
+                                // Perform the necessary actions for each account
+                                // Replace this with your actual processing logic or API calls
                             }
                         }
                     }
