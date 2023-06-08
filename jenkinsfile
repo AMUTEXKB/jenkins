@@ -241,7 +241,33 @@ pipeline {
         stage('Divide into Batches') {
             steps {
                 script {
-                    def accountList = evaluate(params.ACCOUNT_LIST)
+                    def accountList = [
+                [account_id: "089002832071"],
+                [account_id: "559178150670", name: "AWS CSOD AU External Lift & Shift Prod 01"],
+                [account_id: "123972418909", name: "AWS CSOD AU External Lift & Shift Stage 01"],
+                [account_id: "122034396671", name: "AWS CSOD AU External Management"],
+                [account_id: "061175438249", name: "AWS CSOD AU External Shared"],
+                [account_id: "442630079326", name: "AWS CSOD EU External Centralized Logging"],
+                [account_id: "560027229913", name: "AWS CSOD Global External Identity"],
+                [account_id: "989539595550", name: "AWS CSOD Global External IT Security"],
+                [account_id: "923770930147", name: "AWS CSOD Global Internal Identity"],
+                [account_id: "695602669289", name: "AWS CSOD Global Internal IT Security"],
+                [account_id: "362968320144", name: "AWS CSOD JP External Centralized Logging"],
+                [account_id: "302625437263", name: "AWS CSOD JP External Lift & Shift Prod 01"],
+                [account_id: "418715730055", name: "AWS CSOD JP External Lift & Shift Stage 01"],
+                [account_id: "310806642835", name: "AWS CSOD JP External Management"],
+                [account_id: "041244246982", name: "AWS CSOD JP External Microservices"],
+                [account_id: "441937161114", name: "AWS CSOD JP External Shared"],
+                [account_id: "985635748966", name: "AWS CSOD Transit"],
+                [account_id: "852112241258", name: "AWS CSOD UK External Centralized Logging"],
+                [account_id: "015027927682", name: "AWS CSOD US Corporate Micro Dev"],
+                [account_id: "757485785090", name: "AWS CSOD US Corporate Micro Mgt"],
+                [account_id: "125731558216", name: "AWS CSOD US Corporate Micro Prod"],
+                [account_id: "013416684914", name: "AWS CSOD US Internal Lift & Shift Dev 01"],
+                [account_id: "822194620504", name: "Cloud-Ops-SABAAWSSYDDR"],
+                [account_id: "757008298094", name: "Cloud-Ops-SABAAWSSYDLOG"],
+                [account_id: "335758605862", name: "Cloud-Ops-SABAAWSSYDPRODHOSTING"]
+            ]  
                     def batchSize = 5
 
                     def accountBatches = accountList.collate(batchSize)
