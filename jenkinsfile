@@ -99,7 +99,7 @@
 
 pipeline {
   agent {
-    // Define the agent (e.g., where the pipeline will run)
+    any
   }
   stages {
     stage('Get Org Members') {
