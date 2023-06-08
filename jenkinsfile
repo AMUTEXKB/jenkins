@@ -382,7 +382,12 @@ pipeline {
                     accountBatches.eachWithIndex { accountBatch, index ->
                         def batchNumber = index + 1
 
-                        stage("Batch ${batchNumber}") {
+
+                    }
+                }
+            }
+        }
+                            stage("Batch ${batchNumber}") {
                             steps {
                                 echo "Processing batch ${batchNumber}"
                                 accountBatch.each { account ->
@@ -393,9 +398,5 @@ pipeline {
                                 }
                             }
                         }
-                    }
-                }
-            }
-        }
     }
 }
