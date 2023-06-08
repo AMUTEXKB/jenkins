@@ -5,14 +5,15 @@ pipeline {
         stage('Process Batch') {
             steps {
                 script {
-                    def accountBatch = params.ACCOUNT_BATCH.collect { it.account_id } 
+                    def accountBatch = params.ACCOUNT_BATCH.split(',') // Split the account batch parameter using the appropriate delimiter
 
                     def branches = [:]
                     accountBatch.each { account ->
                         branches[account] = {
                             echo "Processing account: $account"
                             sleep time: 60, unit: 'SECONDS'
-
+                            // Perform the necessary actions for each account
+                            // Replace this with your actual processing logic or API calls
                         }
                     }
 
