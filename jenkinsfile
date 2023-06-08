@@ -31,7 +31,7 @@ pipeline {
                         [account_id: "757008294", name: "SABAWSSYDLOG"],
                         [account_id: "335758605", name: "CSABAAWSSYDPRODHOSTING"]
                     ]
-                    def batchSize = 5
+                    def batchSize = 7
 
                     def accountIds = accountList.collect { it.account_id }
                     def accountBatches = accountIds.collate(batchSize)
@@ -45,7 +45,7 @@ pipeline {
                             parallel accountBatch.collectEntries { account ->
                                 ["Processing account ${account}": {
                                     echo "Processing account: ${account}"
-                                    sleep time: 60, unit: 'SECONDS'
+                                    sleep time: 20, unit: 'SECONDS'
                                     // Perform the necessary actions for each account
                                     // Replace this with your actual processing logic or API calls
                                 }]
