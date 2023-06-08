@@ -179,7 +179,7 @@ pipeline {
                         try {
                           println("Processing account ${accountId} in ${batchName}...")
                         } catch(Exception e) {
-                          log.error("Error occurred: ${e}")
+                          logger.error("Error occurred: ${e}")
                         }
                       
                     }
@@ -193,7 +193,7 @@ pipeline {
     
             executionPlan1.each { k, v -> v() }
           } catch(Exception e) {
-            log.error("Error occurred: ${e}")
+            logger.error("Error occurred: ${e}")
             throw e
           }
         }
