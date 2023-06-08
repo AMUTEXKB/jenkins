@@ -39,18 +39,17 @@ pipeline {
                     accountBatches.eachWithIndex { accountBatch, index ->
                         def batchNumber = index + 1
 
-                        stage("Batch ${batchNumber}") {
+                      
                             echo "Processing batch ${batchNumber}"
                             
                             parallel accountBatch.collectEntries { account ->
                                 ["Processing account ${account}": {
                                     echo "Processing account: ${account}"
                                     sleep time: 20, unit: 'SECONDS'
-                                    // Perform the necessary actions for each account
-                                    // Replace this with your actual processing logic or API calls
+
                                 }]
                             }
-                        }
+                        
                     }
                 }
             }
