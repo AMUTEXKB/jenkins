@@ -206,68 +206,37 @@
 
 pipeline {
     agent any
-
-    parameters {
-        string(name: 'ACCOUNT_LIST', defaultValue: '[\n' +
-                '    [account_id: "089032071"],\n' +
-                '    [account_id: "559178170", name: "a AU External Lift & Shift Prod 01"],\n' +
-                '    [account_id: "122418909", name: "a AU External Lift & Shift Stage 01"],\n' +
-                '    [account_id: "122036671", name: "a AU External Management"],\n' +
-                '    [account_id: "065438249", name: "a AU External Shared"],\n' +
-                '    [account_id: "442639326", name: "a EU External Centralized Logging"],\n' +
-                '    [account_id: "567229913", name: "a Global External Identity"],\n' +
-                '    [account_id: "989595550", name: "a Global External IT Security"],\n' +
-                '    [account_id: "920930147", name: "a Global Internal Identity"],\n' +
-                '    [account_id: "695609289", name: "a Global Internal IT Security"],\n' +
-                '    [account_id: "362320144", name: "a JP External Centralized Logging"],\n' +
-                '    [account_id: "302437263", name: "a JP External Lift & Shift Prod 01"],\n' +
-                '    [account_id: "415730055", name: "a JP External Lift & Shift Stage 01"],\n' +
-                '    [account_id: "310642835", name: "a JP External Management"],\n' +
-                '    [account_id: "044896982", name: "a JP External Microservices"],\n' +
-                '    [account_id: "441937114", name: "a JP External Shared"],\n' +
-                '    [account_id: "985648966", name: "a Transit"],\n' +
-                '    [account_id: "852241258", name: "a UK External Centralized Logging"],\n' +
-                '    [account_id: "017927682", name: "a US Corporate Micro Dev"],\n' +
-                '    [account_id: "757485090", name: "a US Corporate Micro Mgt"],\n' +
-                '    [account_id: "125731216", name: "a US Corporate Micro Prod"],\n' +
-                '    [account_id: "016684914", name: "a US Internal Lift & Shift Dev 01"],\n' +
-                '    [account_id: "822120504", name: "SABAAWSSYDDR"],\n' +
-                '    [account_id: "757008294", name: "SABAWSSYDLOG"],\n' +
-                '    [account_id: "335758605", name: "CSABAAWSSYDPRODHOSTING"]\n' +
-                ']')
-    }
-
     stages {
         stage('Divide into Batches') {
             steps {
                 script {
                     def accountList = [
-                [account_id: "089002832071"],
-                [account_id: "559178150670", name: "AWS CSOD AU External Lift & Shift Prod 01"],
-                [account_id: "123972418909", name: "AWS CSOD AU External Lift & Shift Stage 01"],
-                [account_id: "122034396671", name: "AWS CSOD AU External Management"],
-                [account_id: "061175438249", name: "AWS CSOD AU External Shared"],
-                [account_id: "442630079326", name: "AWS CSOD EU External Centralized Logging"],
-                [account_id: "560027229913", name: "AWS CSOD Global External Identity"],
-                [account_id: "989539595550", name: "AWS CSOD Global External IT Security"],
-                [account_id: "923770930147", name: "AWS CSOD Global Internal Identity"],
-                [account_id: "695602669289", name: "AWS CSOD Global Internal IT Security"],
-                [account_id: "362968320144", name: "AWS CSOD JP External Centralized Logging"],
-                [account_id: "302625437263", name: "AWS CSOD JP External Lift & Shift Prod 01"],
-                [account_id: "418715730055", name: "AWS CSOD JP External Lift & Shift Stage 01"],
-                [account_id: "310806642835", name: "AWS CSOD JP External Management"],
-                [account_id: "041244246982", name: "AWS CSOD JP External Microservices"],
-                [account_id: "441937161114", name: "AWS CSOD JP External Shared"],
-                [account_id: "985635748966", name: "AWS CSOD Transit"],
-                [account_id: "852112241258", name: "AWS CSOD UK External Centralized Logging"],
-                [account_id: "015027927682", name: "AWS CSOD US Corporate Micro Dev"],
-                [account_id: "757485785090", name: "AWS CSOD US Corporate Micro Mgt"],
-                [account_id: "125731558216", name: "AWS CSOD US Corporate Micro Prod"],
-                [account_id: "013416684914", name: "AWS CSOD US Internal Lift & Shift Dev 01"],
-                [account_id: "822194620504", name: "Cloud-Ops-SABAAWSSYDDR"],
-                [account_id: "757008298094", name: "Cloud-Ops-SABAAWSSYDLOG"],
-                [account_id: "335758605862", name: "Cloud-Ops-SABAAWSSYDPRODHOSTING"]
-            ]  
+                        [account_id: "089032071"],
+                        [account_id: "559178170", name: "a AU External Lift & Shift Prod 01"],
+                        [account_id: "122418909", name: "a AU External Lift & Shift Stage 01"],
+                        [account_id: "122036671", name: "a AU External Management"],
+                        [account_id: "065438249", name: "a AU External Shared"],
+                        [account_id: "442639326", name: "a EU External Centralized Logging"],
+                        [account_id: "567229913", name: "a Global External Identity"],
+                        [account_id: "989595550", name: "a Global External IT Security"],
+                        [account_id: "920930147", name: "a Global Internal Identity"],
+                        [account_id: "695609289", name: "a Global Internal IT Security"],
+                        [account_id: "362320144", name: "a JP External Centralized Logging"],
+                        [account_id: "302437263", name: "a JP External Lift & Shift Prod 01"],
+                        [account_id: "415730055", name: "a JP External Lift & Shift Stage 01"],
+                        [account_id: "310642835", name: "a JP External Management"],
+                        [account_id: "044896982", name: "a JP External Microservices"],
+                        [account_id: "441937114", name: "a JP External Shared"],
+                        [account_id: "985648966", name: "a Transit"],
+                        [account_id: "852241258", name: "a UK External Centralized Logging"],
+                        [account_id: "017927682", name: "a US Corporate Micro Dev"],
+                        [account_id: "757485090", name: "a US Corporate Micro Mgt"],
+                        [account_id: "125731216", name: "a US Corporate Micro Prod"],
+                        [account_id: "016684914", name: "a US Internal Lift & Shift Dev 01"],
+                        [account_id: "822120504", name: "SABAAWSSYDDR"],
+                        [account_id: "757008294", name: "SABAWSSYDLOG"],
+                        [account_id: "335758605", name: "CSABAAWSSYDPRODHOSTING"]
+                    ]
                     def batchSize = 5
 
                     def accountIds = accountList.collect { it.account_id }
@@ -289,13 +258,11 @@ pipeline {
 }
 
 def waitForCompletion(jobName) {
-    
-        def buildNumber = waitForNextBuild(jobName)
-        waitUntil {
-            build(job: jobName, parameters: [], propagate: false).number > buildNumber
-        }
+    def buildNumber = waitForNextBuild(jobName)
+    waitUntil {
+        build(job: jobName, parameters: [], propagate: false).number > buildNumber
     }
-
+}
 
 def waitForNextBuild(jobName) {
     def job = Jenkins.instance.getItem(jobName)
