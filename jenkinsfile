@@ -148,7 +148,7 @@ pipeline {
               if (index == accountBatches.size() - 1 && accountBatch.size() < batchSize) {
                 // Handle the last batch separately
                 executionPlan1["Enabling security standards for ${batchName}"] = {
-                  log.info("Starting batch ${batchName}")
+                  println("Starting batch ${batchName}")
                   def parallelExecution = [:]
                   parallelExecution[batchName] = {                        
                     accountBatch.each { accountId ->
@@ -157,32 +157,32 @@ pipeline {
                           if (accountId == "123972418909" || accountId == "822194620504") {
                             throw new RuntimeException("Intentional error for account ${accountId}")
                           }
-                          log.info("Processing account ${accountId} in ${batchName}...")
+                          println("Processing account ${accountId} in ${batchName}...")
                         } catch(Exception e) {
                           log.error("Error occurred: ${e}")
                         }
                       }
                     }
                   }
-                  log.info("Completed  batch ${batchName}")
+                  println("Completed  batch ${batchName}")
                 }
               } else {
                 // Handle all other batches
                 executionPlan1["Enabling security standards for ${batchName}"] = {
-                  log.info("Starting batch ${batchName}")
+                  println("Starting batch ${batchName}")
                   def parallelExecution = [:]
                   parallelExecution[batchName] = {
                     accountBatch.each { accountId ->
                       parallel("${accountId}") {
                         try {
-                          log.info("Processing account ${accountId} in ${batchName}...")
+                          println("Processing account ${accountId} in ${batchName}...")
                         } catch(Exception e) {
                           log.error("Error occurred: ${e}")
                         }
                       }
                     }
                   }
-                  log.info("Completed  batch ${batchName}")
+                  println("Completed  batch ${batchName}")
                 }
               }
             }
