@@ -1,4 +1,4 @@
-awsPipeline {
+pipeline {
     stage('Get Org Members') {
         try {
             Map args = [
