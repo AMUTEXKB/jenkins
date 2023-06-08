@@ -187,10 +187,11 @@ pipeline {
                   }
                   logger.info("Completed  batch ${batchName}")
                 //   parallel("${accountId}")
+                 parallel(parallelExecution)
                 }
               }
             }
-    
+               
             executionPlan1.each { k, v -> v() }
           } catch(Exception e) {
             logger.error("Error occurred: ${e}")
