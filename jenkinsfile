@@ -96,13 +96,14 @@
 //     }
 // }}
 
-
+import java.util.logging.Logger
 pipeline {
   agent any
   stages {
     stage('Get Org Members') {
       steps {
         script {
+          def logger = Logger.getLogger("")  
           try {
             Map args = [
               'region_name': params.AWS_REGIONS,
@@ -148,7 +149,7 @@ pipeline {
               if (index == accountBatches.size() - 1 && accountBatch.size() < batchSize) {
                 // Handle the last batch separately
                 executionPlan1["Enabling security standards for ${batchName}"] = {
-                  println("Starting batch ${batchName}")
+                  logger.info("Starting batch ${batchName}")
                   def parallelExecution = [:]
                   parallelExecution[batchName] = {                        
                     accountBatch.each { accountId ->
@@ -157,15 +158,15 @@ pipeline {
                           if (accountId == "123972418909" || accountId == "822194620504") {
                             throw new RuntimeException("Intentional error for account ${accountId}")
                           }
-                          println("Processing account ${accountId} in ${batchName}...")
+                          logger.info("Processing account ${accountId} in ${batchName}...")
                         } catch(Exception e) {
-                          log.error("Error occurred: ${e}")
+                          logger.error("Error occurred: ${e}")
                         }
                       
                     }
                     parallel("${accountId}")
                   }
-                  println("Completed  batch ${batchName}")
+                  logger.info("Completed  batch ${batchName}")
                 }
               } else {
                 // Handle all other batches
