@@ -1,4 +1,5 @@
 pipeline {
+    agent any
     stage('Get Org Members') {
         try {
             Map args = [
