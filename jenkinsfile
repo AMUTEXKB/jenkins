@@ -41,13 +41,15 @@ pipeline {
 
                         stage("Batch ${batchNumber}") {
                             echo "Processing batch ${batchNumber}"
-                            accountBatch.each { account ->
-                                echo "Processing account: ${account}"
-                                sleep time: 60, unit: 'SECONDS'
-                                // Perform the necessary actions for each account
-                                // Replace this with your actual processing logic or API calls
+                            
+                            parallel accountBatch.collectEntries { account ->
+                                ["Processing account ${account}": {
+                                    echo "Processing account: ${account}"
+                                    sleep time: 60, unit: 'SECONDS'
+                                    // Perform the necessary actions for each account
+                                    // Replace this with your actual processing logic or API calls
+                                }]
                             }
-                        parallel accountBatch
                         }
                     }
                 }
