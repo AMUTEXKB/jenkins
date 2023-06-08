@@ -171,13 +171,13 @@ pipeline {
               } else {
                 // Handle all other batches
                 executionPlan1["Enabling security standards for ${batchName}"] = {
-                  logger.info("Starting batch ${batchName}")
+                  println("Starting batch ${batchName}")
                   def parallelExecution = [:]
                   parallelExecution[batchName] = {
                     accountBatch.each { accountId ->
                     //   parallel("${accountId}") {
                         try {
-                          logger.info("Processing account ${accountId} in ${batchName}...")
+                          println("Processing account ${accountId} in ${batchName}...")
                           sleep time: 60, unit: 'SECONDS'
                         } catch(Exception e) {
                           logger.error("Error occurred: ${e}")
@@ -186,7 +186,7 @@ pipeline {
                     }
                     
                   }
-                  logger.info("Completed  batch ${batchName}")
+                  println("Completed  batch ${batchName}")
                 //   parallel("${accountId}")
                  parallel(parallelExecution)
                 }
