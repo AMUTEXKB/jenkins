@@ -262,13 +262,13 @@ pipeline {
 }
 
 def waitForCompletion(jobName) {
-    timeout(time: 1, unit: 'MINUTES') {
+    
         def buildNumber = waitForNextBuild(jobName)
         waitUntil {
             build(job: jobName, parameters: [], propagate: false).number > buildNumber
         }
     }
-}
+
 
 def waitForNextBuild(jobName) {
     def job = Jenkins.instance.getItem(jobName)
