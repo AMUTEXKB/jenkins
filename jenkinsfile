@@ -152,7 +152,7 @@ pipeline {
                   def parallelExecution = [:]
                   parallelExecution[batchName] = {                        
                     accountBatch.each { accountId ->
-                      parallel("${accountId}") {
+                    //   parallel("${accountId}") {
                         try {
                           if (accountId == "123972418909" || accountId == "822194620504") {
                             throw new RuntimeException("Intentional error for account ${accountId}")
@@ -161,8 +161,9 @@ pipeline {
                         } catch(Exception e) {
                           log.error("Error occurred: ${e}")
                         }
-                      }
+                      
                     }
+                    parallel("${accountId}")
                   }
                   println("Completed  batch ${batchName}")
                 }
@@ -173,14 +174,15 @@ pipeline {
                   def parallelExecution = [:]
                   parallelExecution[batchName] = {
                     accountBatch.each { accountId ->
-                      parallel("${accountId}") {
+                    //   parallel("${accountId}") {
                         try {
                           println("Processing account ${accountId} in ${batchName}...")
                         } catch(Exception e) {
                           log.error("Error occurred: ${e}")
                         }
-                      }
+                      
                     }
+                    parallel("${accountId}")
                   }
                   println("Completed  batch ${batchName}")
                 }
