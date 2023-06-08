@@ -312,8 +312,11 @@ pipeline {
                     accountBatches.eachWithIndex { accountBatch, index ->
                         def batchNumber = index + 1
 
+                        // Convert the accountBatch to a comma-separated string
+                        def accountBatchString = accountBatch.join(',')
+
                         // Trigger the batch processing build for the current batch
-                        build job: 'Batch Processing Build', parameters: [string(name: 'ACCOUNT_BATCH', value: accountBatch.join(','))]
+                        build job: 'Batch Processing Build', parameters: [string(name: 'ACCOUNT_BATCH', value: accountBatchString)]
 
                         // Wait for the completion of the current batch before triggering the next batch
                         waitForCompletion('Batch Processing Build')
