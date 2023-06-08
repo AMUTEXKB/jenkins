@@ -180,7 +180,7 @@ pipeline {
                           println("Processing account ${accountId} in ${batchName}...")
                           sleep time: 60, unit: 'SECONDS'
                         } catch(Exception e) {
-                          logger.error("Error occurred: ${e}")
+                          println("Error occurred: ${e}")
                         }
                       
                     }
