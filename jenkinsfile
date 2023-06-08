@@ -1,6 +1,4 @@
 awsPipeline {
-    def commonFuncs = load('automation/scripts/groovy/common.groovy')
-    List buildParams = commonFuncs.inferBuildParams()
     stage('Get Org Members') {
         try {
             Map args = [
