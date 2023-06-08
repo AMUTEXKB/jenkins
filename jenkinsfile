@@ -182,9 +182,10 @@ pipeline {
                         }
                       
                     }
-                    parallel("${accountId}")
+                    
                   }
                   println("Completed  batch ${batchName}")
+                  parallel("${accountId}")
                 }
               }
             }
